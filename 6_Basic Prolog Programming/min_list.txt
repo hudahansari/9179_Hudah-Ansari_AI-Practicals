@@ -1,0 +1,16 @@
+min([Item], Item).
+min([Item | List], Item) :- 
+	min(List, List_Answer),
+	Item =< List_Answer, !.
+min([_Item | List], Answer) :-
+	min(List, Answer).
+
+% Here's the built-in function
+
+min_list([H|T], Min) :-
+    min_list(T, H, Min).
+
+min_list([], Min, Min).
+min_list([H|T], Min0, Min) :-
+    Min1 is min(H, Min0),
+    min_list(T, Min1, Min).
